@@ -15,7 +15,7 @@ function initialize() {
   const widget = document.querySelector('.widget');
 
   // Создание табов
-  const amountTabs = 5;
+  const amountTabs = categories.length; // Количество табов и секций зависит от количества категорий в JSON (одна категория = один таб)
   for (let i = 0; i < amountTabs; i++) {
     const inputTab = makeElement('input', 'widget__input');
     const labelTab = makeElement('label', 'widget__label');
@@ -35,13 +35,12 @@ function initialize() {
   activeTab.checked = 'true';
 
   // Создание секций для карточек
-  const amountSections = 5;
-  for (let i = 0; i < amountSections; i++) {
-    const amountCards = 5;
+  for (let i = 0; i < amountTabs; i++) {
     const widgetContent = makeElement('section', 'widget__content');
 
     widgetContent.id = `content${i + 1}`;
     // Создание карточек товара в каждой секции
+    const amountCards = 5;
     for (let j = 0; j < amountCards; j++) {
       const div = makeElement('div', 'content__card');
       const pic = makeElement('img', 'content__picture');
@@ -61,6 +60,7 @@ function initialize() {
   products.sort(function (current, next) {
     return current.categoryId - next.categoryId;
   });
+
   // Добавляем названия табов в разметку
   tabName.forEach(function (item, i) {
     item.textContent = categories[i].categoryName;
@@ -69,10 +69,20 @@ function initialize() {
   productsName.forEach(function (item, i) {
     item.textContent = products[i].productName;
   });
+
+  /* addContent(productsName, products, productName);
+  addContent(tabName, categories, categoryName); */
 }
+
+/* function addContent(collection, array, key) {
+  collection.forEach(function (item, i) {
+    item.textContent = array[i].key;
+  });
+} */
+
 // Функция создания элементов верстки
 function makeElement(tagName, className, ...classNames) {
   const element = document.createElement(tagName);
   element.classList.add(className, ...classNames);
   return element;
-};
+}
