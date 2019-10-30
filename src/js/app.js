@@ -1,7 +1,7 @@
+// Имитация получения JSON с сервера
 const url = 'https://my-json-server.typicode.com/awk-ward/test/db';
 let categories;
 let products;
-// Имитация получения JSON с сервера
 fetch(url)
   .then(function (response) {
     response.json().then(function (json) {
@@ -69,16 +69,7 @@ function initialize() {
   productsName.forEach(function (item, i) {
     item.textContent = products[i].productName;
   });
-
-  /* addContent(productsName, products, productName);
-  addContent(tabName, categories, categoryName); */
 }
-
-/* function addContent(collection, array, key) {
-  collection.forEach(function (item, i) {
-    item.textContent = array[i].key;
-  });
-} */
 
 // Функция создания элементов верстки
 function makeElement(tagName, className, ...classNames) {
